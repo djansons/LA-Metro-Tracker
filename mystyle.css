@@ -1,0 +1,58 @@
+.iframe-container{
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+.iframe-container > *{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* Demo styles */
+body{
+    padding: 50px;
+    background-color: rgb(39, 38, 38);
+    
+}
+.iframe-container{
+  margin-bottom: 50px;
+  background: #eee;
+}
+
+#map {
+    height:600px;
+    width: 100%;
+}
+    
+html, body {
+        height: 100%;
+        margin:0;
+        padding:0;
+        overflow: auto;
+}
+canvas {
+        margin:auto;
+    }
+
+.labels {
+ color: red;
+ background-color: white;
+ font-family: "Lucida Grande", "Arial", sans-serif;
+ font-size: 10px;
+ font-weight: bold;
+ text-align: center;
+ width: 40px;
+ border: 2px solid black;
+ white-space: nowrap;
+}
+
+
+
