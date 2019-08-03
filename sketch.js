@@ -4,94 +4,68 @@ Video referenced (9:05)"createP from DOM" https://vimeo.com/142698165 */
 
 
 
-var routeData;
 
-var x;
+
+
+
 
 var map;
-
 var centre;
 
-var url = "http://api.metro.net/agencies/lametro/routes/4/vehicles/";
-
 var redLineStopsUrl = 'http://api.metro.net/agencies/lametro-rail/routes/802/stops/?callback=?';
-
-
-var lat=0;
-var long=0;
-
-var busPos; 
 
 var marker = new Array();
 var stopMarkers = new Array();
 
 var xmlTxt;
 
-var xmlLat, xmlLong;
-var xmlLatHTML, xmlLongHTML;
+var xmlVehicles;
 
-var txt, txt1;
+var vehicleLat, vehicleLon;
 
-//var redLine = [new google.maps.L]
+
 
 const xhr = new XMLHttpRequest();
 
 function initMap() {
   centre = {lat: 33.942281, lng:  -118.137163};
-  map = new google.maps.Map(
-  document.getElementById('map'), {zoom: 11, center: centre});
-  //marker[0] = new google.maps.Marker({lat: 33.942281, lng:  -118.137163, map: map});
-  //marker[0].setPosition( new google.maps.LatLng(33.942281, -118.137163) );
-  //setInterval(getLocations, 5000);
-  
+  map = new google.maps.Map( document.getElementById('map'), {zoom: 11, center: centre});
   setupMarkers();
-  
-
-  
-  
   setInterval(updateMarkers, 5000);
-  //setInterval(updateTime, 5000);
   drawLine();
+
+    /* Change markers on zoom */
+  google.maps.event.addListener(map, 'zoom_changed', function() {
+  var zoom = map.getZoom();
+  // iterate over markers and call setVisible
+  console.log('Hello');
+  for (i = 0; i < stopMarkers.length; i++) {
+      stopMarkers[i].setVisible(false);
+  }
+  });
+
   }
 
 
-function stopsData(data){
-  for (var i = 0; i < data.items.length; i++) {
-    var stopLat = data.items[i].latitude; 
-    var stopLong = data.items[i].longitude; 
 
-    console.log(stopLat + stopLong)
-    marker[i] = new google.maps.Marker({lat: stopLat, lng: stopLong, map: map});
-    }
-
-
-}
-
-
-function setup() {
   
   
-  
-  
-
-}
-
 
 function setupMarkers() {
   xhr.onreadystatechange = function(){
     if (xhr.readyState == 4){
       if (xhr.status == 200){
         xmlTxt = xhr.responseXML;
-        xmlLat = xmlTxt.getElementsByTagName('vehicle');
-        for(i=0; i<xmlLat.length; i++){
-          txt = xmlLat[i].getAttribute('lat');
-          txt1 = xmlLat[i].getAttribute('lon');
-          marker[i] = new google.maps.Marker({lat: txt, lng:  txt1, map: map, icon: 'redTrain0.png'});
-          marker[i].setPosition( new google.maps.LatLng(txt, txt1) );
+        xmlVehicles = xmlTxt.getElementsByTagName('vehicle');
+        for(i=0; i<xmlVehicles.length; i++){
+          vehicleLat = xmlVehicles[i].getAttribute('lat');
+          vehicleLon = xmlVehicles[i].getAttribute('lon');
+          marker[i] = new google.maps.Marker({lat: vehicleLat, lng:  vehicleLon, map: map, icon: 'redTrain0.png'});
+          marker[i].setPosition( new google.maps.LatLng(vehicleLat, vehicleLon) );
         }
         
-        document.getElementById("latVal").innerHTML = txt;
-        document.getElementById("longVal").innerHTML = txt1;
+        document.getElementById("latVal").innerHTML = vehicleLat;
+        document.getElementById("longVal").innerHTML = vehicleLon;
 
 
         var markerIcon = {
@@ -125,10 +99,6 @@ function setupMarkers() {
              }
           });
        });
-
-        
-        
-  
       }
   
       if(xhr.status == 404){
@@ -142,8 +112,6 @@ function setupMarkers() {
   
 }
 
-
-              
 
 function drawLine(){
 
@@ -174,45 +142,8 @@ function drawLine(){
      flightPath.setMap(map);
   }
   
-function updateTime(){
-
-  var epochTime = new Date();
-  var timestamp = epochTime.getTime()/1000 + epochTime.getTimezoneOffset() * 60
-  var timeURL = 'https://maps.googleapis.com/maps/api/timezone/json?location=39.6034810,-119.6822510&timestamp=' + timestamp + '&key=AIzaSyBPVL26qvawqmHHVfNhdmbjgPcGcsErkz0';
-  $.getJSON(timeURL, function(result){  
-    var dstOffset = result.dstOffset;
-    var rawOffset = result.rawOffset;
-    var offsets = dstOffset * 1000 + rawOffset * 1000;
-    var localDate = new Date(timestamp * 1000 + offsets)
-    console.log(localDate);
-  });
- 
-  
-  
-
-
-  //var timeData;
-  //var time;
-  //loadJSON(timeURL, gotData, 'jsonp');
-  
-  //   $.getJSON(timeURL, function(result){
-      
-  //     console.log(result);
-  // });
-}
-
-function gotData(data){
-
-
-
-   
-
-     
+function gotData(data){  
    console.log(data);
-  
-   
-    
-   
  }
 
 
@@ -223,13 +154,13 @@ function updateMarkers(){
         if (xhr.status == 200){
           xmlTxt = xhr.responseXML;
           console.log(xmlTxt);
-          xmlLat = xmlTxt.getElementsByTagName('vehicle');
-          for(i=0; i<xmlLat.length; i++){
-            txt = xmlLat[i].getAttribute('lat');
-            txt1 = xmlLat[i].getAttribute('lon');
-            var markerAngle = xmlLat[i].getAttribute('heading');
-            marker[i].setPosition( new google.maps.LatLng(txt, txt1) );
-            switch (xmlLat[i].getAttribute('heading')){
+          xmlVehicles = xmlTxt.getElementsByTagName('vehicle');
+          for(i=0; i<xmlVehicles.length; i++){
+            vehicleLat = xmlVehicles[i].getAttribute('lat');
+            vehicleLon = xmlVehicles[i].getAttribute('lon');
+            var markerAngle = xmlVehicles[i].getAttribute('heading');
+            marker[i].setPosition( new google.maps.LatLng(vehicleLat, vehicleLon) );
+            switch (xmlVehicles[i].getAttribute('heading')){
               
               case '0':
               marker[i].setIcon('redTrain0.png');
@@ -252,8 +183,9 @@ function updateMarkers(){
             
           }
           
-          document.getElementById("latVal").innerHTML = txt;
-          document.getElementById("longVal").innerHTML = txt1;
+          document.getElementById("latVal").innerHTML = vehicleLat;
+          document.getElementById("longVal").innerHTML = vehicleLon;
+          
           
     
         }
