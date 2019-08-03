@@ -21,7 +21,6 @@
 <body>
 		<nav class="navbar navbar-dark bg-dark navbar-expand-sm">
 				<div class="container">
-			  
 				  <a href="index.html" class="navbar-brand">LA Metro
 					<img src='Station.png' style="width:40px;" alt="metrologo">
 				</a>
@@ -35,15 +34,15 @@
 		<div id="map"></div>
 		<section class="container">
 			<div class="row">
-					<article class="col">
-						<div style="text-align:center; padding-top: 0;"> <h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/en/city/5368361"></a></h3> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=medium&timezone=America%2FLos_Angeles" width="100%" height="115" frameborder="0" seamless></iframe> </div>
-				</article>
-				<article class="col">
-						<a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/" data-icons="Climacons Animated" data-mode="Current" data-theme="original" data-basecolor="rgb(39, 38, 38)" >Los Angeles, CA, USA</a>
+					<div class="col">	 
+					 <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=medium&timezone=America%2FLos_Angeles" width="100%"  frameborder="0"></iframe> 	
+					</div>
+				<div class="col">
+				<a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/"  data-mode="Current" data-theme="original" data-basecolor="rgb(39, 38, 38)" >Los Angeles, CA, USA</a>
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 </script>
-				</article>
+				</div>
 			</div>
 		</section>
 		
@@ -52,7 +51,7 @@
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 </script>		
-<script src="https://maps.googleapis.com/maps/api/js?key=ReplaceWithGoogleMapsAPIKey&callback=initMap&mid=1RH_Nsl7kt5MHV37t7oLIlzz3G3id40ZT"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPVL26qvawqmHHVfNhdmbjgPcGcsErkz0&callback=initMap&mid=1RH_Nsl7kt5MHV37t7oLIlzz3G3id40ZT"
 async defer></script>
 		<h1>"Lat: " <span id="latVal"></span></h1>
 		<h1>"Long: " <span id="longVal"></span></h1>	
