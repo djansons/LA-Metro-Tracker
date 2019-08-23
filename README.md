@@ -1,6 +1,6 @@
 # LA-Metro-Tracker
 
-First of all, this project is a work in progress.
+First of all, this project is a work in progress which I plan to finish in the summer break of 2019.
 
 If you want the google map to be watermark free, you will need to input an API key on line 54 of index.html
 
