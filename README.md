@@ -1,6 +1,6 @@
 # LA-Metro-Tracker
 
-First of all, this project is a work in progress which I plan to finish in the summer break of 2019.
+This project provides real-time location of the metro trains on the red line in Los Angeles.
 
 If you want the google map to work, you will need to input an API key on line 54 of index.html
 
